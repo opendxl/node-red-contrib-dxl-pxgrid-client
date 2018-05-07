@@ -1,0 +1,37 @@
+[
+    {
+        "id": "b6405f39.f06b4",
+        "type": "tab",
+        "label": "ISE ANC Apply Endpoint Policy Notification Example",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "6ded62bb.73ec1c",
+        "type": "debug",
+        "z": "b6405f39.f06b4",
+        "name": "Output event payload",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 520,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "ddb79639.0d63d8",
+        "type": "dxl-ise-anc-apply-endpoint-policy in",
+        "z": "b6405f39.f06b4",
+        "name": "Receive ISE ANC apply endpoint policy notification",
+        "client": "",
+        "x": 210,
+        "y": 40,
+        "wires": [
+            [
+                "6ded62bb.73ec1c"
+            ]
+        ]
+    }
+]

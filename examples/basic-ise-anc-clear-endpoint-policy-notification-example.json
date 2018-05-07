@@ -1,0 +1,37 @@
+[
+    {
+        "id": "43b1b131.776c3",
+        "type": "tab",
+        "label": "ISE ANC Clear Endpoint Policy Notification Example",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "a6ddc0e1.8b6ed",
+        "type": "debug",
+        "z": "43b1b131.776c3",
+        "name": "Output event payload",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 520,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "fdfb9053.fc1b5",
+        "type": "dxl-ise-anc-clear-endpoint-policy in",
+        "z": "43b1b131.776c3",
+        "name": "Receive ISE ANC clear endpoint policy notification",
+        "client": "",
+        "x": 210,
+        "y": 40,
+        "wires": [
+            [
+                "a6ddc0e1.8b6ed"
+            ]
+        ]
+    }
+]

@@ -1,0 +1,38 @@
+<script type="text/javascript">
+  RED.nodes.registerType('dxl-ise-anc-clear-endpoint-policy in', {
+    category: 'cisco ise notifications',
+    defaults: {
+      name: {value: ''},
+      client: {type: 'dxl-client',
+        required: false,
+        validate: function () { return DXL.validators.client(this) }
+      }
+    },
+    color: '#b0e1ff',
+    inputs: 0,
+    outputs: 1,
+    icon: 'cisco.png',
+    label: function () {
+      return this.name || 'ISE ANC clear endpoint policy notification'
+    },
+    labelStyle: function () {
+      return this.name ? 'node_label_italic' : ''
+    },
+    paletteLabel: 'ise anc clear endpoint policy notification'
+  })
+</script>
+
+<script type="text/x-red" data-template-name="dxl-ise-anc-clear-endpoint-policy in">
+    <div class="form-row">
+        <label for="node-input-client"><i class="icon-tag"></i> Client</label>
+        <input type="text" id="node-input-client" placeholder="Client">
+    </div>
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="dxl-ise-anc-clear-endpoint-policy in">
+    <p>TBD</p>
+</script>

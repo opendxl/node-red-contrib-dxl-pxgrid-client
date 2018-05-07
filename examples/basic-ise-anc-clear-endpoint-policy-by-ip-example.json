@@ -1,0 +1,58 @@
+[
+    {
+        "id": "47b17cec.01b324",
+        "type": "tab",
+        "label": "ISE ANC Clear Endpoint Policy By IP Address Example",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "d5aa5da7.e146d",
+        "type": "dxl-ise-anc-clear-endpoint-policy-by-ip",
+        "z": "47b17cec.01b324",
+        "name": "Clear quarantine policy from endpoint",
+        "policy": "quarantine_policy",
+        "client": "",
+        "x": 370,
+        "y": 40,
+        "wires": [
+            [
+                "d7e1e48a.0835c8"
+            ]
+        ]
+    },
+    {
+        "id": "d7e1e48a.0835c8",
+        "type": "debug",
+        "z": "47b17cec.01b324",
+        "name": "Output result",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 610,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "f688d466.2332f8",
+        "type": "inject",
+        "z": "47b17cec.01b324",
+        "name": "Set IP address",
+        "topic": "",
+        "payload": "<SPECIFY_IP_ADDRESS>",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 120,
+        "y": 40,
+        "wires": [
+            [
+                "d5aa5da7.e146d"
+            ]
+        ]
+    }
+]

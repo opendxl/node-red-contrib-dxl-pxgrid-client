@@ -1,0 +1,58 @@
+[
+    {
+        "id": "222ec7cc.dc7a08",
+        "type": "tab",
+        "label": "ISE ANC Apply Endpoint Policy By MAC Address Example",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "1b9957db.dc7268",
+        "type": "dxl-ise-anc-apply-endpoint-policy-by-mac",
+        "z": "222ec7cc.dc7a08",
+        "name": "Apply quarantine policy to endpoint",
+        "policy": "quarantine_policy",
+        "client": "",
+        "x": 360,
+        "y": 40,
+        "wires": [
+            [
+                "96271b3d.5002c8"
+            ]
+        ]
+    },
+    {
+        "id": "96271b3d.5002c8",
+        "type": "debug",
+        "z": "222ec7cc.dc7a08",
+        "name": "Output result",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 590,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "bf8f6e87.56e57",
+        "type": "inject",
+        "z": "222ec7cc.dc7a08",
+        "name": "Set MAC address",
+        "topic": "",
+        "payload": "<SPECIFY_MAC_ADDRESS>",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 120,
+        "y": 40,
+        "wires": [
+            [
+                "1b9957db.dc7268"
+            ]
+        ]
+    }
+]

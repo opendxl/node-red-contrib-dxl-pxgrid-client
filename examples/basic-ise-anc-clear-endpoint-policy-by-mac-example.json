@@ -1,0 +1,58 @@
+[
+    {
+        "id": "cc6ee38.07d822",
+        "type": "tab",
+        "label": "ISE ANC Clear Endpoint Policy By MAC Address Example",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "3d1adbc2.0df0f4",
+        "type": "dxl-ise-anc-clear-endpoint-policy-by-mac",
+        "z": "cc6ee38.07d822",
+        "name": "Clear quarantine policy from endpoint",
+        "policy": "quarantine_policy",
+        "client": "",
+        "x": 370,
+        "y": 40,
+        "wires": [
+            [
+                "c6b51ed8.dc1e2"
+            ]
+        ]
+    },
+    {
+        "id": "c6b51ed8.dc1e2",
+        "type": "debug",
+        "z": "cc6ee38.07d822",
+        "name": "Output result",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 610,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "b5c0faa5.5c8618",
+        "type": "inject",
+        "z": "cc6ee38.07d822",
+        "name": "Set MAC address",
+        "topic": "",
+        "payload": "<SPECIFY_MAC_ADDRESS>",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 120,
+        "y": 40,
+        "wires": [
+            [
+                "3d1adbc2.0df0f4"
+            ]
+        ]
+    }
+]
