@@ -1,7 +1,6 @@
 'use strict'
 
-var bootstrap = require('@opendxl/dxl-bootstrap')
-var MessageUtils = bootstrap.MessageUtils
+var MessageUtils = require('@opendxl/node-red-contrib-dxl').MessageUtils
 var util = require('../lib/util')
 
 var ISE_EVENT_ANC_CLEAR_ENDPOINT_POLICY_TOPIC = util.ISE_ANC_EVENT_PREFIX +
@@ -10,6 +9,8 @@ var ISE_EVENT_ANC_CLEAR_ENDPOINT_POLICY_TOPIC = util.ISE_ANC_EVENT_PREFIX +
 module.exports = function (RED) {
   function IseClearApplyEndpointPolicyInNode (nodeConfig) {
     RED.nodes.createNode(this, nodeConfig)
+
+    this._payloadType = nodeConfig.payloadType || 'obj'
 
     /**
      * Handle to the DXL client node used to make requests to the DXL fabric.
@@ -30,7 +31,8 @@ module.exports = function (RED) {
       this._client.registerUserNode(this)
       var callback = function (event) {
         try {
-          node.send({payload: MessageUtils.jsonPayloadToObject(event)})
+          node.send({payload: MessageUtils.decodePayload(event,
+            node._payloadType)})
         } catch (e) {
           node.error('Error converting event to json. Error: ' + e.message +
             ', Payload: ' + event.payload, {payload: event.payload})

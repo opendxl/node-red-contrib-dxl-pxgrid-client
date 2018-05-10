@@ -1,7 +1,8 @@
 'use strict'
 
 var dxl = require('@opendxl/dxl-client')
-var MessageUtils = require('@opendxl/dxl-bootstrap').MessageUtils
+var bootstrap = require('@opendxl/dxl-bootstrap')
+var nodeRedDxl = require('@opendxl/node-red-contrib-dxl')
 var util = require('../lib/util')
 
 var ISE_EVENT_ANC_CLEAR_ENDPOINT_POLICY_BY_IP_TOPIC = util.ISE_ANC_PREFIX +
@@ -10,6 +11,8 @@ var ISE_EVENT_ANC_CLEAR_ENDPOINT_POLICY_BY_IP_TOPIC = util.ISE_ANC_PREFIX +
 module.exports = function (RED) {
   function IseAncClearEndpointPolicyByIpNode (nodeConfig) {
     RED.nodes.createNode(this, nodeConfig)
+
+    this._returnType = nodeConfig.returnType || 'obj'
 
     this._policy = nodeConfig.policy
     /**
@@ -41,7 +44,7 @@ module.exports = function (RED) {
         } else {
           var request = new dxl.Request(
             ISE_EVENT_ANC_CLEAR_ENDPOINT_POLICY_BY_IP_TOPIC)
-          MessageUtils.objectToJsonPayload(request, {
+          bootstrap.MessageUtils.objectToJsonPayload(request, {
             ip: msg.payload,
             policyName: policy
           })
@@ -51,7 +54,8 @@ module.exports = function (RED) {
                 node.error(error.message, msg)
               } else {
                 try {
-                  msg.payload = MessageUtils.jsonPayloadToObject(response)
+                  msg.payload = nodeRedDxl.MessageUtils.decodePayload(response,
+                    node._returnType)
                   node.send(msg)
                 } catch (e) {
                   node.error(

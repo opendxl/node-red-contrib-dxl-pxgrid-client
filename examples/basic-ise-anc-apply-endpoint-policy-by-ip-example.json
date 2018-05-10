@@ -1,30 +1,31 @@
 [
     {
-        "id": "fa83e3e.6c1722",
+        "id": "8485f259.2f0f4",
         "type": "tab",
         "label": "ISE ANC Apply Endpoint Policy By IP Address Example",
         "disabled": false,
         "info": ""
     },
     {
-        "id": "9198f0d8.0ef6e",
+        "id": "5e5b73e6.6274cc",
         "type": "dxl-ise-anc-apply-endpoint-policy-by-ip",
-        "z": "fa83e3e.6c1722",
+        "z": "8485f259.2f0f4",
         "name": "Apply quarantine policy to endpoint",
         "policy": "quarantine_policy",
         "client": "",
+        "returnType": "obj",
         "x": 360,
         "y": 40,
         "wires": [
             [
-                "c127d63f.3db6d8"
+                "efd0ee56.56436"
             ]
         ]
     },
     {
-        "id": "c127d63f.3db6d8",
+        "id": "efd0ee56.56436",
         "type": "debug",
-        "z": "fa83e3e.6c1722",
+        "z": "8485f259.2f0f4",
         "name": "Output result",
         "active": true,
         "tosidebar": true,
@@ -36,9 +37,9 @@
         "wires": []
     },
     {
-        "id": "465c89d6.8d1bd8",
+        "id": "9433d4d.fa77e28",
         "type": "inject",
-        "z": "fa83e3e.6c1722",
+        "z": "8485f259.2f0f4",
         "name": "Set IP address",
         "topic": "",
         "payload": "<SPECIFY_IP_ADDRESS>",
@@ -51,7 +52,7 @@
         "y": 40,
         "wires": [
             [
-                "9198f0d8.0ef6e"
+                "5e5b73e6.6274cc"
             ]
         ]
     }

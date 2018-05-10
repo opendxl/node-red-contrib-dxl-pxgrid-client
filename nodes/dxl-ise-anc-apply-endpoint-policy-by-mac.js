@@ -1,7 +1,8 @@
 'use strict'
 
 var dxl = require('@opendxl/dxl-client')
-var MessageUtils = require('@opendxl/dxl-bootstrap').MessageUtils
+var bootstrap = require('@opendxl/dxl-bootstrap')
+var nodeRedDxl = require('@opendxl/node-red-contrib-dxl')
 var util = require('../lib/util')
 
 var ISE_EVENT_ANC_APPLY_ENDPOINT_POLICY_BY_MAC_TOPIC = util.ISE_ANC_PREFIX +
@@ -12,6 +13,9 @@ module.exports = function (RED) {
     RED.nodes.createNode(this, nodeConfig)
 
     this._policy = nodeConfig.policy
+
+    this._returnType = nodeConfig.returnType || 'obj'
+
     /**
      * Handle to the DXL client node used to make requests to the DXL fabric.
      * @type {Client}
@@ -41,7 +45,7 @@ module.exports = function (RED) {
         } else {
           var request = new dxl.Request(
             ISE_EVENT_ANC_APPLY_ENDPOINT_POLICY_BY_MAC_TOPIC)
-          MessageUtils.objectToJsonPayload(request, {
+          bootstrap.MessageUtils.objectToJsonPayload(request, {
             mac: msg.payload,
             policyName: policy
           })
@@ -51,7 +55,8 @@ module.exports = function (RED) {
                 node.error(error.message, msg)
               } else {
                 try {
-                  msg.payload = MessageUtils.jsonPayloadToObject(response)
+                  msg.payload = nodeRedDxl.MessageUtils.decodePayload(response,
+                    node._returnType)
                   node.send(msg)
                 } catch (e) {
                   node.error(
