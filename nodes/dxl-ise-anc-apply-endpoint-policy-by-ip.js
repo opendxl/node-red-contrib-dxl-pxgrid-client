@@ -3,6 +3,7 @@
 var dxl = require('@opendxl/dxl-client')
 var bootstrap = require('@opendxl/dxl-bootstrap')
 var nodeRedDxl = require('@opendxl/node-red-contrib-dxl')
+var NodeUtils = nodeRedDxl.NodeUtils
 var util = require('../lib/util')
 
 var ISE_EVENT_ANC_APPLY_ENDPOINT_POLICY_BY_IP_TOPIC = util.ISE_ANC_PREFIX +
@@ -11,8 +12,6 @@ var ISE_EVENT_ANC_APPLY_ENDPOINT_POLICY_BY_IP_TOPIC = util.ISE_ANC_PREFIX +
 module.exports = function (RED) {
   function IseAncApplyEndpointPolicyByIpNode (nodeConfig) {
     RED.nodes.createNode(this, nodeConfig)
-
-    this._policy = nodeConfig.policy
 
     this._returnType = nodeConfig.returnType || 'obj'
 
@@ -34,7 +33,7 @@ module.exports = function (RED) {
     if (this._client) {
       this._client.registerUserNode(this)
       this.on('input', function (msg) {
-        var policy = node._policy || msg.policy
+        var policy = NodeUtils.defaultIfEmpty(nodeConfig.policy, msg.policy)
         if (!msg.payload) {
           this.error(
             'Unable to send request, ip address not available in payload.')
