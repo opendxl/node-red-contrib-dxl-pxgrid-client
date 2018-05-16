@@ -1,46 +1,46 @@
 [
     {
-        "id": "e7a29869.9871c8",
+        "id": "bc2ee651.03e338",
         "type": "tab",
         "label": "ISE ANC Clear Endpoint Policy By MAC Address Example",
         "disabled": false,
         "info": ""
     },
     {
-        "id": "1a7737c6.e54428",
+        "id": "73777771.102058",
         "type": "dxl-ise-anc-clear-endpoint-policy-by-mac",
-        "z": "e7a29869.9871c8",
+        "z": "bc2ee651.03e338",
         "name": "Clear quarantine policy from endpoint",
-        "policy": "quarantine_policy",
+        "policyName": "quarantine_policy",
         "client": "",
         "returnType": "obj",
-        "x": 370,
-        "y": 40,
+        "x": 330,
+        "y": 220,
         "wires": [
             [
-                "e4067c99.dca2f"
+                "b9a31250.e30ff"
             ]
         ]
     },
     {
-        "id": "e4067c99.dca2f",
+        "id": "b9a31250.e30ff",
         "type": "debug",
-        "z": "e7a29869.9871c8",
+        "z": "bc2ee651.03e338",
         "name": "Output result",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
         "complete": "payload",
-        "x": 610,
-        "y": 40,
+        "x": 570,
+        "y": 220,
         "wires": []
     },
     {
-        "id": "d32281fd.f5dd9",
+        "id": "4a191f98.557dc",
         "type": "inject",
-        "z": "e7a29869.9871c8",
-        "name": "Set MAC address",
+        "z": "bc2ee651.03e338",
+        "name": "Specify MAC address",
         "topic": "",
         "payload": "<SPECIFY_MAC_ADDRESS>",
         "payloadType": "str",
@@ -48,11 +48,38 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 120,
+        "x": 140,
         "y": 40,
         "wires": [
             [
-                "1a7737c6.e54428"
+                "df411829.c31978"
+            ]
+        ]
+    },
+    {
+        "id": "df411829.c31978",
+        "type": "change",
+        "z": "bc2ee651.03e338",
+        "name": "Set MAC address request parameter",
+        "rules": [
+            {
+                "t": "set",
+                "p": "macAddress",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 270,
+        "y": 120,
+        "wires": [
+            [
+                "73777771.102058"
             ]
         ]
     }

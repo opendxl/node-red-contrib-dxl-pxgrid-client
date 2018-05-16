@@ -33,22 +33,22 @@ module.exports = function (RED) {
     if (this._client) {
       this._client.registerUserNode(this)
       this.on('input', function (msg) {
-        var policy = NodeUtils.defaultIfEmpty(nodeConfig.policy, msg.policy)
-        if (!msg.payload) {
-          this.error(
-            'Unable to send request, ip address not available in payload.')
-        } else if (!policy) {
-          this.error('Unable to send request, no policy available')
+        var policyName = NodeUtils.defaultIfEmpty(nodeConfig.policyName,
+          msg.policyName)
+        if (!msg.ipAddress) {
+          node.error('ipAddress property was not specified')
+        } else if (!policyName) {
+          node.error('policyName property was not specified')
         } else if (!node._client.connected) {
-          this.error('Unable to send request, not connected')
+          node.error('Unable to send request, not connected')
         } else {
           var request = new dxl.Request(
             ISE_EVENT_ANC_CLEAR_ENDPOINT_POLICY_BY_IP_TOPIC)
           bootstrap.MessageUtils.objectToJsonPayload(request, {
-            ip: msg.payload,
-            policyName: policy
+            ip: msg.ipAddress,
+            policyName: policyName
           })
-          this._client.asyncRequest(request,
+          node._client.asyncRequest(request,
             function (error, response) {
               if (error) {
                 node.error(error.message, msg)

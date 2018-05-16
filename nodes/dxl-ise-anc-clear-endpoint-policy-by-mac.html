@@ -3,7 +3,7 @@
     category: 'cisco ise operations',
     defaults: {
       name: {value: ''},
-      policy: {value: ''},
+      policyName: {value: ''},
       client: {type: 'dxl-client',
         required: false,
         validate: function () { return DXL.validators.client(this) }
@@ -30,8 +30,8 @@
         <input type="text" id="node-input-client" placeholder="Client">
     </div>
     <div class="form-row">
-        <label for="node-input-policy"><i class="fa fa-tasks"></i> Policy</label>
-        <input type="text" id="node-input-policy" placeholder="Policy">
+        <label for="node-input-policyName"><i class="fa fa-tasks"></i> Policy name</label>
+        <input type="text" id="node-input-policyName" placeholder="Policy name">
     </div>
     <div class="form-row">
         <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>

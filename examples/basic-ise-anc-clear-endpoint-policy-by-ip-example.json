@@ -1,46 +1,46 @@
 [
     {
-        "id": "f69dd8ec.c86578",
+        "id": "4774f737.706048",
         "type": "tab",
         "label": "ISE ANC Clear Endpoint Policy By IP Address Example",
         "disabled": false,
         "info": ""
     },
     {
-        "id": "30cbd30.e186c2e",
+        "id": "f28063a1.34b86",
         "type": "dxl-ise-anc-clear-endpoint-policy-by-ip",
-        "z": "f69dd8ec.c86578",
+        "z": "4774f737.706048",
         "name": "Clear quarantine policy from endpoint",
-        "policy": "quarantine_policy",
+        "policyName": "quarantine_policy",
         "client": "",
         "returnType": "obj",
-        "x": 370,
-        "y": 40,
+        "x": 330,
+        "y": 220,
         "wires": [
             [
-                "af4700b5.861e3"
+                "a541a614.1c48d8"
             ]
         ]
     },
     {
-        "id": "af4700b5.861e3",
+        "id": "a541a614.1c48d8",
         "type": "debug",
-        "z": "f69dd8ec.c86578",
+        "z": "4774f737.706048",
         "name": "Output result",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
         "complete": "payload",
-        "x": 610,
-        "y": 40,
+        "x": 570,
+        "y": 220,
         "wires": []
     },
     {
-        "id": "70adf186.64945",
+        "id": "f4a88f87.03c38",
         "type": "inject",
-        "z": "f69dd8ec.c86578",
-        "name": "Set IP address",
+        "z": "4774f737.706048",
+        "name": "Specify IP address",
         "topic": "",
         "payload": "<SPECIFY_IP_ADDRESS>",
         "payloadType": "str",
@@ -48,11 +48,38 @@
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
-        "x": 120,
+        "x": 130,
         "y": 40,
         "wires": [
             [
-                "30cbd30.e186c2e"
+                "5efca67c.c3f478"
+            ]
+        ]
+    },
+    {
+        "id": "5efca67c.c3f478",
+        "type": "change",
+        "z": "4774f737.706048",
+        "name": "Set IP address request parameter",
+        "rules": [
+            {
+                "t": "set",
+                "p": "ipAddress",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 260,
+        "y": 120,
+        "wires": [
+            [
+                "f28063a1.34b86"
             ]
         ]
     }
