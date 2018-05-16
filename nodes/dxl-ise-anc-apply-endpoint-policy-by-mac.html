@@ -45,8 +45,39 @@
             <option value="obj">a parsed JSON object</option>
         </select>
     </div>
+    <div class="form-tips">Tip: Leave policy name blank if you want to set it via the <code>msg.policyName</code> property</div>
 </script>
 
 <script type="text/x-red" data-help-name="dxl-ise-anc-apply-endpoint-policy-by-mac">
-    TBD
+    <p>Apply a policy in Cisco ISE to an endpoint by its MAC address.</p>
+    <h3>Inputs</h3>
+    <dl class="message-properties">
+        <dt>macAddress <span class="property-type">string</span></dt>
+        <dd> MAC address of the endpoint.</dd>
+        <dt class="optional">policyName <span class="property-type">string</span></dt>
+        <dd> Name of the policy to apply. If the value is empty, the policy name will be derived from the input message's <code>msg.policyName</code> property.</dd>
+    </dl>
+    <h3>Outputs</h3>
+    <dl class="message-properties">
+        <dt>payload <span class="property-type">string | object | buffer</span></dt>
+        <dd> Results of the attempt to apply the endpoint policy. Through the <code>Return</code> node property, the node can be configured to set the payload type as a UTF-8 String, an Object parsed from a JSON formatted string, or as a binary Buffer.</dd>
+    </dl>
+    <h3>Node Properties</h3>
+    <dl class="message-properties">
+        <dt>Client</dt>
+        <dd> Configuration node for the DXL client through which the request should be made. Click on the pencil icon to add or modify a client configuration.</dd>
+        <dt>Name</dt>
+        <dd> Used only for display purposes in the Node-RED user interface.</dd>
+        <dt>Return</dt>
+        <dd> Controls the data type for the <code>msg.payload</code> property in the output message. If an error occurs when attempting to convert the payload into the desired data type, the current flow is halted with an error.</dd>
+    </dl>
+    <h3>Details</h3>
+    <p>An example return payload for a successful policy application is shown below:</p>
+    <pre>{
+    "ancStatus": "success"
+}</pre>
+    <p>If the policy has already been associated with the endpoint before the example is run, the flow is halted with an <code>error.message</code> similar to the following:</p>
+    <pre>mac address is already associated with this policy error associated with mac 00:11:22:33:44:55</pre>
+    <p>If the policy has not been defined before the example is run, the flow is halted with an <code>error.message</code> similar to the following:</p>
+    <pre>Policy is not configured error associated with mac 00:11:22:33:44:55</pre>
 </script>

@@ -43,5 +43,25 @@
 </script>
 
 <script type="text/x-red" data-help-name="dxl-ise-anc-apply-endpoint-policy in">
-    <p>TBD</p>
+    <p>Subscribes for ANC "apply endpoint policy" events that Cisco ISE sends through the DXL fabric.</p>
+    <h3>Outputs</h3>
+    <dl class="message-properties">
+        <dt>payload <span class="property-type">string | object | buffer</span></dt>
+        <dd> Payload of the "apply endpoint policy" event. Through the <code>Payload type</code> node property, the node can be configured to set the event payload as a UTF-8 String, an Object parsed from a JSON formatted string, or as a binary Buffer.</dd>
+    </dl>
+    <h3>Node Properties</h3>
+    <dl class="message-properties">
+        <dt>Client</dt>
+        <dd> Configuration node for the DXL client through which the request should be made. Click on the pencil icon to add or modify a client configuration.</dd>
+        <dt>Name</dt>
+        <dd> Used only for display purposes in the Node-RED user interface.</dd>
+        <dt>Payload type</dt>
+        <dd> Controls the data type for the <code>msg.payload</code> property in the new message injected into a flow. If an error occurs when attempting to convert the binary Buffer of the payload into the desired data type, the current flow is halted with an error.</dd>
+    </dl>
+    <h3>Details</h3>
+    <p>An example "apply endpoint policy" object payload is shown below:</p>
+    <pre>{
+    "ipAddress": "192.168.1.1",
+    "policyName": "quarantine_policy"
+}</pre>
 </script>
