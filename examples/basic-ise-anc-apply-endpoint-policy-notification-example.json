@@ -1,15 +1,15 @@
 [
     {
-        "id": "979ea39.833ab6",
+        "id": "bffd5193.a3252",
         "type": "tab",
         "label": "ISE ANC Apply Endpoint Policy Notification Example",
         "disabled": false,
-        "info": ""
+        "info": "This sample registers for Cisco Adaptive Network Control (ANC) apply endpoint\r\npolicy notifications via DXL and Cisco pxGrid. The payload from the event\r\nreceived for the Cisco pxGrid request is printed to the Node-RED `debug` tab.\r\n\r\n### Prerequisites\r\n\r\n* The samples configuration step has been completed (see the\r\n  [DXL Configuration Sample](https://github.com/opendxl/node-red-contrib-dxl/wiki/Client-Configuration)).\r\n* The DXL fabric to which the client will connect has been bridged to Cisco\r\n  pxGrid.\r\n* The DXL client associated with the\r\n  `Receive ISE ANC apply endpoint policy notification` node has been authorized\r\n  to receive `DXL Cisco pxGrid Notifications`\r\n  (see [Authorize Client to Use Cisco pxGrid via DXL](https://opendxl.github.io/opendxl-pxgrid-client-python/pydoc/pxgridauth.html)).\r\n* ANC ``Apply Endpoint Policy`` notifications from pxGrid have been enabled\r\n  (see [Enable Cisco pxGrid Notifications for DXL](https://opendxl.github.io/opendxl-pxgrid-client-python/pydoc/pxgridnotifications.html)).\r\n* An ANC policy named `quarantine_policy` has been configured. The policy\r\n  could be created by logging into the Cisco Identity Services Engine (ISE) web\r\n  interface and performing the following steps:\r\n\r\n  * Navigate to **Operations** ▶ **Adaptive Network Control** ▶ \r\n    **Policy List**.\r\n  * On the **List** screen, click on the **Add** button.\r\n  * On the **List** ▶ **New** screen, enter `quarantine_policy` in the\r\n    **name** field, select `QUARANTINE` in the **Action** field, and press\r\n    the **Submit** button.\r\n\r\n### Setup\r\n\r\nTo deploy the flow, press the `Deploy` button in the upper-right corner of the\r\nscreen. If Node-RED is able to properly connect to the DXL fabric, a green dot\r\nwith the word `connected` should appear under the\r\n`Receive ISE ANC apply endpoint policy notification` node.\r\n\r\n### Running\r\n\r\nTo generate an apply endpoint policy by IP address notification, run through the\r\nsteps in the `ISE ANC Apply Endpoint Policy by IP Address Example`. With the\r\nflows for both the `ISE ANC Apply Endpoint Policy Notification Example` and\r\n`ISE ANC Apply Endpoint Policy by IP Address Example` loaded in different\r\ntabs, double-click the button on the left side of the `Specify IP address` node\r\non the `ISE ANC Apply Endpoint Policy Notification Example` tab.\r\n\r\n### Output\r\n\r\nIf the policy can be applied successfully, messages similar to the following\r\nshould be displayed to the Node-RED `debug` tab:\r\n\r\n```\r\n▶ { policyName: \"quarantine_policy\", ipAddress: \"192.168.1.1\" }\r\n```\r\n\r\n```\r\n▶ { ancStatus: \"success\" }\r\n```\r\n\r\nThe message containing the `policyName` and `ipAddress` keys is the payload\r\nreceived from the apply endpoint policy notification.\r\n\r\n### Details\r\n\r\nThe flow exercises the nodes below.\r\n\r\n#### Receive ISE ANC apply endpoint policy notification\r\n\r\nThis is an `ise anc apply endpoint policy notification` node which starts the\r\nflow. This node injects a new message with a `payload` property which contains\r\nthe content of the apply endpoint policy notification.\r\n\r\n#### Output event payload\r\n\r\nThis is a `debug` output node. This node outputs the `payload` set on the\r\nmessage by the `Receive ISE ANC apply endpoint policy notification` node. The\r\npayload object should include a key of \"policyName\" and associated value of\r\n\"quarantine_policy\", the policy which was applied to the endpoint. The object\r\nshould also include a key of \"ipAddress\" and value which corresponds to the\r\nip address entered in the `Specify IP address` node on the\r\n`ISE ANC Apply Endpoint Policy Notification Example` flow tab."
     },
     {
-        "id": "25e38e6.436e572",
+        "id": "d34ad4e7.35f008",
         "type": "debug",
-        "z": "979ea39.833ab6",
+        "z": "bffd5193.a3252",
         "name": "Output event payload",
         "active": true,
         "tosidebar": true,
@@ -21,9 +21,9 @@
         "wires": []
     },
     {
-        "id": "c8237868.fc8938",
+        "id": "52239485.4134ac",
         "type": "dxl-ise-anc-apply-endpoint-policy in",
-        "z": "979ea39.833ab6",
+        "z": "bffd5193.a3252",
         "name": "Receive ISE ANC apply endpoint policy notification",
         "client": "",
         "payloadType": "obj",
@@ -31,7 +31,7 @@
         "y": 40,
         "wires": [
             [
-                "25e38e6.436e572"
+                "d34ad4e7.35f008"
             ]
         ]
     }
