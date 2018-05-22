@@ -3,10 +3,7 @@
     category: 'cisco ise notifications',
     defaults: {
       name: {value: ''},
-      client: {type: 'dxl-client',
-        required: false,
-        validate: function () { return DXL.validators.client(this) }
-      },
+      client: {type: 'dxl-client', required: true},
       payloadType: {value: 'obj'}
     },
     color: '#b0e1ff',
