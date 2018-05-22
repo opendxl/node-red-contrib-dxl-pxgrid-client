@@ -33,9 +33,10 @@ module.exports = function (RED) {
     if (this._client) {
       this._client.registerUserNode(this)
       this.on('input', function (msg) {
+        var ipAddress = NodeUtils.extractProperty(msg, 'ipAddress')
         var policyName = NodeUtils.defaultIfEmpty(nodeConfig.policyName,
-          msg.policyName)
-        if (!msg.ipAddress) {
+          NodeUtils.extractProperty(msg, 'policyName'))
+        if (!ipAddress) {
           node.error('ipAddress property was not specified')
         } else if (!policyName) {
           node.error('policyName property was not specified')
@@ -45,7 +46,7 @@ module.exports = function (RED) {
           var request = new dxl.Request(
             ISE_EVENT_ANC_APPLY_ENDPOINT_POLICY_BY_IP_TOPIC)
           bootstrap.MessageUtils.objectToJsonPayload(request, {
-            ip: msg.ipAddress,
+            ip: ipAddress,
             policyName: policyName
           })
           node._client.asyncRequest(request,
