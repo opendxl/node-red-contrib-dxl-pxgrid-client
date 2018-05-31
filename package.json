@@ -25,7 +25,8 @@
   },
   "dependencies": {
     "@opendxl/node-red-contrib-dxl": "^0.1.0",
-    "@opendxl/dxl-bootstrap": "^0.1.0"
+    "@opendxl/dxl-bootstrap": "^0.1.0",
+    "@opendxl/dxl-client": "^0.0.1"
   },
   "devDependencies": {
     "express": "^4.16.2",
