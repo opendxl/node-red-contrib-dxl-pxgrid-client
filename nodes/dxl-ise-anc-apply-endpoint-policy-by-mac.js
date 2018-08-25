@@ -1,3 +1,10 @@
+/**
+ * @module DxlIseAncApplyEndpointPolicyByMac
+ * @description Implementation of the
+ * `dxl-ise-anc-apply-endpoint-policy-by-mac` node
+ * @private
+ */
+
 'use strict'
 
 var dxl = require('@opendxl/dxl-client')
@@ -10,9 +17,31 @@ var ISE_EVENT_ANC_APPLY_ENDPOINT_POLICY_BY_MAC_TOPIC = util.ISE_ANC_PREFIX +
   'applyendpointpolicybymac'
 
 module.exports = function (RED) {
+  /**
+   * @classdesc Node which applies a policy to an endpoint by its MAC address
+   * using Cisco Adaptive Network Control (ANC).
+   * @param {Object} nodeConfig - Configuration data which the node uses.
+   * @param {String} [nodeConfig.policyName] - Name of the policy to apply. If
+   *   the value is empty, the policy name will be derived from the input
+   *   message's `msg.policyName` property.
+   * @param {String} [nodeConfig.returnType=obj] - Controls the data type for
+   *   the response payload, set as `msg.payload`. If returnType is 'bin',
+   *   `msg.payload` is a raw binary Buffer. If returnType is 'txt',
+   *   `msg.payload` is a String (decoded as UTF-8). If returnType is 'obj', is
+   *   an Object (decoded as a JSON document from the original payload). If an
+   *   error occurs when attempting to convert the binary Buffer of the payload
+   *   into the desired data type, the current flow is halted with an error.
+   * @private
+   * @constructor
+   */
   function IseAncApplyEndpointPolicyByMacNode (nodeConfig) {
     RED.nodes.createNode(this, nodeConfig)
 
+    /**
+     * Controls the data type for the result payload.
+     * @type {String}
+     * @private
+     */
     this._returnType = nodeConfig.returnType || 'obj'
 
     /**
