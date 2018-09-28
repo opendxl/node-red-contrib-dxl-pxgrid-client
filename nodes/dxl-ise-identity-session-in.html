@@ -1,5 +1,5 @@
 <script type="text/javascript">
-  RED.nodes.registerType('dxl-ise-anc-clear-endpoint-policy in', {
+  RED.nodes.registerType('dxl-ise-identity-session in', {
     category: 'cisco ise notifications',
     defaults: {
       name: {value: ''},
@@ -11,16 +11,16 @@
     outputs: 1,
     icon: 'cisco.png',
     label: function () {
-      return this.name || 'ISE ANC clear endpoint policy notification'
+      return this.name || 'ISE session notification'
     },
     labelStyle: function () {
       return this.name ? 'node_label_italic' : ''
     },
-    paletteLabel: 'ise anc clear endpoint policy notification'
+    paletteLabel: 'ise session notification'
   })
 </script>
 
-<script type="text/x-red" data-template-name="dxl-ise-anc-clear-endpoint-policy in">
+<script type="text/x-red" data-template-name="dxl-ise-identity-session in">
     <div class="form-row">
         <label for="node-input-client"><i class="icon-tag"></i> Client</label>
         <input type="text" id="node-input-client" placeholder="Client">
@@ -39,12 +39,12 @@
     </div>
 </script>
 
-<script type="text/x-red" data-help-name="dxl-ise-anc-clear-endpoint-policy in">
-    <p>Subscribes for ANC "clear endpoint policy" events that Cisco ISE sends through the DXL fabric.</p>
+<script type="text/x-red" data-help-name="dxl-ise-identity-session in">
+    <p>Subscribes for session events that Cisco ISE sends through the DXL fabric.</p>
     <h3>Outputs</h3>
     <dl class="message-properties">
         <dt>payload <span class="property-type">string | object | buffer</span></dt>
-        <dd> Payload of the "clear endpoint policy" event. Through the <code>Payload type</code> node property, the node can be configured to set the event payload as a UTF-8 String, an Object parsed from a JSON formatted string, or as a binary Buffer.</dd>
+        <dd> Payload of the "session" event. Through the <code>Payload type</code> node property, the node can be configured to set the event payload as a UTF-8 String, an Object parsed from a JSON formatted string, or as a binary Buffer.</dd>
     </dl>
     <h3>Node Properties</h3>
     <dl class="message-properties">
@@ -56,8 +56,53 @@
         <dd> Controls the data type for the <code>msg.payload</code> property in the new message injected into a flow. If an error occurs when attempting to convert the binary Buffer of the payload into the desired data type, the current flow is halted with an error.</dd>
     </dl>
     <h3>Details</h3>
-    <p>An example "clear endpoint policy" object payload is shown below:</p>
+    <p>An example object payload for a session "started" event is shown below:</p>
     <pre>{
-    "ipAddress": "192.168.1.1"
+    "IdentitySourceFirstPort": "0",
+    "IdentitySourcePortEnd": "0",
+    "IdentitySourcePortStart": "0",
+    "MDMEndpoint": {},
+    "RADIUSAttrs": [
+        {
+            "attrName": "Acct-Session-Id",
+            "attrValue": "123"
+        }
+    ],
+    "assessedPostureEvent": [
+        {}
+    ],
+    "attribute": [
+        {
+            "name": "Authorization_Profiles",
+            "type": "string",
+            "value": "1234"
+        }
+    ],
+    "endpointCheckResult": "none",
+    "endpointProfile": "Microsoft-Device",
+    "gid": "24703",
+    "interface": {
+        "deviceAttachPt": {
+            "deviceMgmtIntfID": {
+                "ipAddress": "192.168.1.1"
+            }
+        },
+        "ipIntfID": [
+            {
+                "ipAddress": "192.168.1.1"
+            }
+        ],
+        "macAddress": [
+            "00:11:22:33:44:55"
+        ]
+    },
+    "lastUpdateTime": "2017-09-21T22:43:38.006Z",
+    "providers": [
+        "None"
+    ],
+    "state": "Started",
+    "user": {
+        "name": "root"
+    }
 }</pre>
 </script>
