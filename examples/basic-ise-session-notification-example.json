@@ -1,0 +1,38 @@
+[
+    {
+        "id": "47f25735.f04b88",
+        "type": "tab",
+        "label": "ISE Session Notification Example",
+        "disabled": false,
+        "info": "This sample registers for Cisco Identity Services Engine (ISE) session\r\nnotifications via DXL and Cisco pxGrid. The payload from the event\r\nreceived for the Cisco pxGrid request is printed to the Node-RED `debug` tab.\r\n\r\n### Prerequisites\r\n\r\n* The samples configuration step has been completed (see\r\n  [Client Configuration](https://opendxl.github.io/node-red-contrib-dxl/jsdoc/tutorial-configuration.html)).\r\n* The DXL fabric to which the client will connect has been bridged to Cisco\r\n  pxGrid.\r\n* The DXL client associated with the `Receive ISE session notification` node has\r\n  been authorized to receive `DXL Cisco pxGrid Notifications`\r\n  (see [Authorize Client to Use Cisco pxGrid via DXL](https://opendxl.github.io/opendxl-pxgrid-client-python/pydoc/pxgridauth.html)).\r\n* `Session Notifications` from pxGrid have been enabled\r\n  (see [Enable Cisco pxGrid Notifications for DXL](https://opendxl.github.io/opendxl-pxgrid-client-python/pydoc/pxgridnotifications.html)).\r\n\r\n### Setup\r\n\r\nTo deploy the flow, press the `Deploy` button in the upper-right corner of the\r\nscreen. If Node-RED is able to properly connect to the DXL fabric, a green dot\r\nwith the word `connected` should appear under the\r\n`Receive ISE session notification` node.\r\n\r\n### Running\r\n\r\nTo generate a session notification, create a session for an endpoint on the\r\nCisco ISE server. If you do not have access to an IEEE 802.1x environment, you\r\ncan use the Cisco RADIUS Simulator (see the\r\n[pxGrid ISE testing guide](https://developer.cisco.com/site/pxgrid/documents/config-and-test/ise-2-0/#radius-simulator-1755)\r\nfor more details).\r\n\r\nFor example, you could run the following RADIUS simulator commands in a separate\r\nterminal command window to startup a new session for a simulated endpoint:\r\n\r\n```\r\njava -cp RadiusSimulator.jar -DUSERNAME=iseuser -DPASSWORD=isepass -DFRAMED_IP_ADDRESS=192.168.1.1 -DFRAMED_IP_MASK=255.255.255.0 -DCALLING_STATION_ID=00:11:22:33:44:55 -DAUDIT_SESSION_ID=1234 RadiusAuthentication 192.168.1.2\r\njava -cp RadiusSimulator.jar -DUSERNAME=iseuser -DPASSWORD=isepass -DFRAMED_IP_ADDRESS=192.168.1.1 -DFRAMED_IP_MASK=255.255.255.0 -DCALLING_STATION_ID=00:11:22:33:44:55 -DAUDIT_SESSION_ID=1234 RadiusAccountingStart 192.168.1.2\r\n```\r\n\r\nThese commands would establish a session for the endpoint ``192.168.1.1`` on\r\nthe ISE server ``192.168.1.2``.\r\n\r\n### Output\r\n\r\nA message similar to the following should appear in the output of the\r\nnotification example after the session has been started:\r\n\r\n```\r\n▶ { IdentitySourceFirstPort: \"0\", IdentitySourcePortEnd: \"0\", IdentitySourcePortStart: \"0\", MDMEndpoint: object, RADIUSAttrs: array[1] … }\r\n```\r\n\r\nAfter clicking on the right arrow button to expand the contents of the object,\r\noutput similar to the following should appear:\r\n\r\n```\r\n▼ object\r\n  IdentitySourceFirstPort: \"0\"\r\n  ▼ interface: object\r\n    ...\r\n    ▼ ipIntfID: array[1]\r\n      ▼ 0: object\r\n        ipAddress: \"192.168.1.1\"\r\n    ▼ macAddress: array[1]\r\n      0: \"00:11:22:33:44:55\"\r\n  state: \"Started\"\r\n...\r\n```\r\n\r\n### Details\r\n\r\nThe flow exercises the nodes below.\r\n\r\n#### Receive ISE session notification\r\n\r\nThis is an `ise session notification` node which starts the flow. This node\r\ninjects a new message with a `payload` property which contains the content of\r\nthe ISE session notification.\r\n\r\n#### Output event payload\r\n\r\nThis is a `debug` output node. This node outputs the `payload` set on the\r\nmessage by the `Receive ISE session notification` node."
+    },
+    {
+        "id": "f8280e08.ff7b2",
+        "type": "debug",
+        "z": "47f25735.f04b88",
+        "name": "Output event payload",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 400,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "5f425468.c91304",
+        "type": "dxl-ise-identity-session in",
+        "z": "47f25735.f04b88",
+        "name": "Receive ISE session notification",
+        "client": "",
+        "payloadType": "obj",
+        "x": 150,
+        "y": 40,
+        "wires": [
+            [
+                "f8280e08.ff7b2"
+            ]
+        ]
+    }
+]

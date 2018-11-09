@@ -53,7 +53,8 @@
       "dxl-ise-anc-apply-endpoint-policy-in": "./nodes/dxl-ise-anc-apply-endpoint-policy-in.js",
       "dxl-ise-anc-clear-endpoint-policy-by-ip": "./nodes/dxl-ise-anc-clear-endpoint-policy-by-ip.js",
       "dxl-ise-anc-clear-endpoint-policy-by-mac": "./nodes/dxl-ise-anc-clear-endpoint-policy-by-mac.js",
-      "dxl-ise-anc-clear-endpoint-policy-in": "./nodes/dxl-ise-anc-clear-endpoint-policy-in.js"
+      "dxl-ise-anc-clear-endpoint-policy-in": "./nodes/dxl-ise-anc-clear-endpoint-policy-in.js",
+      "dxl-ise-identity-session-in": "./nodes/dxl-ise-identity-session-in.js"
     }
   },
   "scripts": {
